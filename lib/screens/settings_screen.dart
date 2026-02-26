@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/app_settings.dart';
+import '../services/audio_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -315,9 +316,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         sound['label']!,
                         style: const TextStyle(color: Colors.white, fontSize: 15),
                       ),
-                      trailing: _settings.selectedSound == sound['key']
-                          ? const Icon(Icons.check, color: Colors.white, size: 18)
-                          : null,
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.play_circle_outline,
+                                color: Colors.grey, size: 22),
+                            onPressed: () => AudioService.preview(
+                                sound['key']!, _settings.volume),
+                          ),
+                          if (_settings.selectedSound == sound['key'])
+                            const Icon(Icons.check, color: Colors.white, size: 18),
+                        ],
+                      ),
                       onTap: () => setState(
                           () => _settings.selectedSound = sound['key']!),
                     ),

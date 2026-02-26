@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:vibration/vibration.dart';
 import '../models/stats_service.dart';
 import '../models/app_settings.dart';
+import '../services/audio_service.dart';
 
 class StopOverlayScreen extends StatefulWidget {
   const StopOverlayScreen({super.key});
@@ -48,9 +49,16 @@ class _StopOverlayScreenState extends State<StopOverlayScreen>
         Vibration.vibrate(pattern: [0, 500, 200, 500, 200, 500]);
       }
     }
+
+    // Звук при появі
+    if (settings.notificationMode == 'sound' ||
+        settings.notificationMode == 'both') {
+      await AudioService.play();
+    }
   }
 
   Future<void> _onRemembered() async {
+    await AudioService.stop();
     await StatsService.recordSession();
 
     // Підтверджуюча вібрація
