@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,7 +67,7 @@ class NotificationService {
         priority: Priority.max,
         playSound: false,
         enableVibration: true,
-        vibrationPattern: [0, 500, 200, 500, 200, 500],
+        vibrationPattern: Int64List.fromList([0, 500, 200, 500, 200, 500]),
         fullScreenIntent: true,
         category: AndroidNotificationCategory.alarm,
       );
@@ -91,7 +92,7 @@ class NotificationService {
         priority: Priority.max,
         playSound: true,
         enableVibration: true,
-        vibrationPattern: [0, 500, 200, 500],
+        vibrationPattern: Int64List.fromList([0, 500, 200, 500]),
         fullScreenIntent: true,
         category: AndroidNotificationCategory.alarm,
       );
