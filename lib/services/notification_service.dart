@@ -59,7 +59,7 @@ class NotificationService {
     AndroidNotificationDetails androidDetails;
 
     if (mode == 'vibration') {
-      androidDetails = const AndroidNotificationDetails(
+      androidDetails = AndroidNotificationDetails(
         'stop_channel',
         'СТОП сповіщення',
         channelDescription: 'Нагадування для практики Гурджієва',
@@ -84,7 +84,7 @@ class NotificationService {
         category: AndroidNotificationCategory.alarm,
       );
     } else {
-      androidDetails = const AndroidNotificationDetails(
+      androidDetails = AndroidNotificationDetails(
         'stop_channel_both',
         'СТОП сповіщення (вібрація + звук)',
         channelDescription: 'Нагадування для практики Гурджієва',
