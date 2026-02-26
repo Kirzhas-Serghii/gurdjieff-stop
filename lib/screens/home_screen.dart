@@ -174,51 +174,34 @@ class _HomeScreenState extends State<HomeScreen>
             children: [
               const SizedBox(height: 32),
 
-              // Головна кнопка СТОП
+              // Головна кнопка — знак СТОП
               ScaleTransition(
                 scale: _pulseAnim,
                 child: GestureDetector(
                   onTap: _onStopTap,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 500),
-                    width: 180,
-                    height: 180,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: _settings.isActive
-                            ? Colors.white
-                            : Colors.grey.shade800,
-                        width: 2,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/stop_sign.png',
+                        width: 180,
+                        height: 180,
+                        color: _settings.isActive ? null : Colors.grey.shade800,
+                        colorBlendMode: _settings.isActive ? null : BlendMode.srcIn,
                       ),
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'СТОП',
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w100,
-                              letterSpacing: 4,
-                              color: _settings.isActive
-                                  ? Colors.white
-                                  : Colors.grey.shade700,
-                            ),
+                      Positioned(
+                        bottom: 8,
+                        child: Text(
+                          'натисни',
+                          style: TextStyle(
+                            fontSize: 10,
+                            letterSpacing: 2,
+                            color: Colors.white.withOpacity(
+                                _settings.isActive ? 0.5 : 0.2),
                           ),
-                          const SizedBox(height: 6),
-                          Text(
-                            'натисни',
-                            style: TextStyle(
-                              fontSize: 11,
-                              letterSpacing: 2,
-                              color: Colors.grey.shade700,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),

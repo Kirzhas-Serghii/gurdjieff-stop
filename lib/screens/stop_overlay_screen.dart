@@ -108,17 +108,13 @@ class _StopOverlayScreenState extends State<StopOverlayScreen>
             children: [
               const Spacer(),
 
-              // Анімований символ СТОП
+              // Знак СТОП
               ScaleTransition(
                 scale: _pulseAnimation,
-                child: const Text(
-                  'С Т О П',
-                  style: TextStyle(
-                    fontSize: 52,
-                    fontWeight: FontWeight.w100,
-                    color: Colors.white,
-                    letterSpacing: 12,
-                  ),
+                child: Image.asset(
+                  'assets/images/stop_sign.png',
+                  width: 160,
+                  height: 160,
                 ),
               ),
 
