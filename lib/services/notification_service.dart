@@ -6,7 +6,10 @@ class NotificationService {
   static FlutterLocalNotificationsPlugin? _plugin;
   static const int stopNotificationId = 1;
 
-  static Future<void> initialize(FlutterLocalNotificationsPlugin plugin) async {
+  static Future<void> initialize(
+    FlutterLocalNotificationsPlugin plugin, {
+    Function(NotificationResponse)? onNotificationTap,
+  }) async {
     _plugin = plugin;
 
     const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -23,13 +26,16 @@ class NotificationService {
 
     await plugin.initialize(
       initSettings,
-      onDidReceiveNotificationResponse: _onNotificationTap,
+      onDidReceiveNotificationResponse: onNotificationTap ?? _onNotificationTap,
+      onDidReceiveBackgroundNotificationResponse: _onBackgroundNotificationTap,
     );
   }
 
-  static void _onNotificationTap(NotificationResponse response) {
-    // Обробка натискання на сповіщення
-  }
+  static void _onNotificationTap(NotificationResponse response) {}
+
+  @pragma('vm:entry-point')
+  static void _onBackgroundNotificationTap(NotificationResponse response) {}
+
 
   static Future<void> requestPermissions() async {
     _plugin ??= FlutterLocalNotificationsPlugin();
